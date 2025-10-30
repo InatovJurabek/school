@@ -19,7 +19,6 @@ class StudentAnswerSerializer(serializers.ModelSerializer):
             'selected_option', 'selected_option_text',
             'text_answer', 'file_answer', 'code_answer',
             'is_correct', 'points_earned', 'feedback',
-            'created_at', 'updated_at',
         ]
         read_only_fields = ['is_correct', 'points_earned', 'feedback', 'created_at'
         ]
