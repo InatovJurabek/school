@@ -1,9 +1,11 @@
 from django.urls import include, path
-from rest_framework.routers import DefaultRouter
 from apps.api_endpoints.answers.views import StudentAnswerViewSet
 
-router = DefaultRouter()
-router.register('answers', StudentAnswerViewSet, basename='answer')
 
-urlpatterns = router.urls
+
+urlpatterns = [
+    path('answers/', StudentAnswerViewSet.as_view({'get': 'list'}), name='answer-list'),
+    path('answers/<int:pk>/', StudentAnswerViewSet.as_view({'get': 'retrieve'}), name='answer-detail'),
+    path('answers-list/', StudentAnswerViewSet.as_view({'get': 'list'}), name='answer_list'),
+]
 

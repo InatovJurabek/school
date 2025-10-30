@@ -12,8 +12,19 @@ class StudentAnswerViewSet(viewsets.ModelViewSet):
     queryset = StudentAnswer.objects.all()
     serializer_class = StudentAnswerSerializer
 
-
-
+    def perform_create(self, serializer):
+        student = self.request.user
+        answer = serializer.save(student=student)
+        if answer.selected_option:
+            answer.is_correct = answer.selected_option.is_correct
+            answer.points_earned = 1 if answer.is_correct else 0
+            answer.feedback = "Correct!" if answer.is_correct else "Incorrect!"
+        elif answer.text_answer:
+            answer.feedback = "Answer received. AI evaluation pending."
+        elif answer.code_answer or answer.file_answer:
+            answer.feedback = "Your answer will be reviewed by teacher."
+        answer.save()
+        return answer
 
 
 @api_view(['GET'])

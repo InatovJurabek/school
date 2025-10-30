@@ -1,7 +1,15 @@
 from rest_framework import serializers
-from apps.assignments.models import StudentAnswer
+from apps.assignments.models import AnswerOption, StudentAnswer
+
+
+class AnswerOptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnswerOption
+        fields = ['id', 'option_text', 'is_correct', 'order']
 
 class StudentAnswerSerializer(serializers.ModelSerializer):
+    selected_option = AnswerOptionSerializer(read_only=True)
+    
     class Meta:
         model = StudentAnswer
         fields = [
@@ -13,8 +21,5 @@ class StudentAnswerSerializer(serializers.ModelSerializer):
             'is_correct', 'points_earned', 'feedback',
             'created_at', 'updated_at',
         ]
-        read_only_fields = [
-            'is_correct', 'points_earned', 'feedback',
-            'created_at', 'updated_at',
-            'student_name', 'question_title', 'selected_option_text'
+        read_only_fields = ['is_correct', 'points_earned', 'feedback', 'created_at'
         ]
