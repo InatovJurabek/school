@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.common',
     'apps.assignments',
-    'apps.api_endpoints',
+    'apps.assignments.api_endpoints',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +82,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

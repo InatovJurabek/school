@@ -1,5 +1,5 @@
 from django.urls import include, path
-from apps.api_endpoints.answers.views import StudentAnswerViewSet
+from apps.assignments.api_endpoints.answers.views import StudentAnswerViewSet
 
 
 
